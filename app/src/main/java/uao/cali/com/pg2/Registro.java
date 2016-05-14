@@ -1,6 +1,7 @@
 package uao.cali.com.pg2;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -8,6 +9,7 @@ import android.text.method.ScrollingMovementMethod;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.IOException;
 
@@ -49,12 +51,12 @@ public class Registro extends Activity{
                 //se adicionan los parametros por POST con esta linea
                 sobre.appendQueryParameter("nombre",params[0]).appendQueryParameter("usuario",params[1]).appendQueryParameter("password",params[2]);
                 //se caputara la respuesta de la API
-                String response = WebUtilDomi.POSTrequest("http://172.16.136.27:8080/WebService/webresources/service/crear_usuario", sobre);
+                String response = WebUtilDomi.POSTrequest("http://192.168.173.1:8080/WebService/webresources/service/crear_usuario", sobre);
                 return response;
             } catch (IOException e) {
-                e.printStackTrace();
+               return e.getMessage();
             }
-            return null;
+
         }
 
         //este metodo se ejecuta despues de que se recibe la respuesta
@@ -62,6 +64,13 @@ public class Registro extends Activity{
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
             salida.setText(s);
+
+            if (s.equals("SUCCESS")){
+                Intent i = new Intent(getApplicationContext(),Login.class);
+                startActivity(i);
+            }else{
+                Toast.makeText(getApplicationContext(),"Usuario existente",Toast.LENGTH_SHORT).show();
+            }
         }
     }
 }
