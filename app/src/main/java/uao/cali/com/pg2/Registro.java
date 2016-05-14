@@ -3,6 +3,7 @@ package uao.cali.com.pg2;
 import android.app.Activity;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.method.ScrollingMovementMethod;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -28,9 +29,11 @@ public class Registro extends Activity{
         ETpassword = (EditText) findViewById(R.id.reg_password);
 
         salida = (TextView) findViewById(R.id.salida);
+        salida.setMovementMethod(new ScrollingMovementMethod());
     }
 
     public void doRegistro(View view) {
+        HttpThread hilo = new HttpThread();
     }
 
     public class HttpThread extends AsyncTask<Void, String, String>{
@@ -40,7 +43,7 @@ public class Registro extends Activity{
         protected String doInBackground(Void... params) {
             //es necesario meterlo en un try catch
             try {
-                String response = WebUtilDomi.GETrequest("http://www.google.com");
+                String response = WebUtilDomi.POSTrequest("http://172.16.136.27:8080/WebService/webresources/service/crear_usuario");
                 return response;
             } catch (IOException e) {
                 e.printStackTrace();
