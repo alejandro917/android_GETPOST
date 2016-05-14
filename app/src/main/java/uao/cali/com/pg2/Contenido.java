@@ -1,6 +1,7 @@
 package uao.cali.com.pg2;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -49,6 +50,11 @@ public class Contenido extends Activity {
         prefs.edit().clear().commit();
         //para borrar una preferencia en particular
         //prefs.edit().remove("password");
+
+        //mando al inicio de sesion. Se puede usar this porque estoy dentro de la clase ppal y no dentro de una subclase
+        Intent i = new Intent(this,Login.class);
+        startActivity(i);
+        finish();
     }
 
     public class PedirUsuarios extends AsyncTask<String, String, String> {
