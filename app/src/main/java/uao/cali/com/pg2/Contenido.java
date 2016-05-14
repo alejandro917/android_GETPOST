@@ -37,7 +37,7 @@ public class Contenido extends Activity {
     public void pedirNoticias(View view) {
         //traer las credenciales de las sharedpreferences
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        String usuario = prefs.getString("usuario","NO_USER");
+        String usuario = prefs.getString("usuario", "NO_USER");
         String password = prefs.getString("password","NO_USER");
         //se lanza el hilo para consumir los datos
         ConsumirWebService hilo = new ConsumirWebService();
@@ -45,6 +45,10 @@ public class Contenido extends Activity {
     }
 
     public void cerrarSesion(View view) {
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        prefs.edit().clear().commit();
+        //para borrar una preferencia en particular
+        //prefs.edit().remove("password");
     }
 
     public class PedirUsuarios extends AsyncTask<String, String, String> {
