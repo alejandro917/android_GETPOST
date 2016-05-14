@@ -1,6 +1,7 @@
 package uao.cali.com.pg2;
 
 import android.app.Activity;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -26,5 +27,12 @@ public class Registro extends Activity{
     }
 
     public void doRegistro(View view) {
+    }
+
+    public class HttpThread extends AsyncTask<Void, String, String>{
+        @Override
+        protected String doInBackground(Void... params) {
+            return null;
+        }
     }
 }
